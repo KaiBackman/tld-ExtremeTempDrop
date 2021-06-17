@@ -1,9 +1,4 @@
-﻿using Harmony;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 using MelonLoader;
 using UnityEngine;
 
@@ -14,7 +9,7 @@ namespace ExtremeTempDrop
         public override void OnApplicationStart()
         {
             Debug.Log($"[{Info.Name}] Version {Info.Version} loaded!");
-            Settings.OnLoad();
+            Settings.instance.AddToModSettings("Extreme Temp Drop");
         }
     }
 
@@ -23,14 +18,14 @@ namespace ExtremeTempDrop
     {
         private static void Postfix(ref float __result, float numDays)
         {
-            if (numDays <= Settings.options.declineStartDay) __result = Settings.options.initialDrop;
-            else if (numDays >= Settings.options.declineEndDay) __result = Settings.options.maxDrop;
+            if (numDays <= Settings.instance.declineStartDay) __result = Settings.instance.initialDrop;
+            else if (numDays >= Settings.instance.declineEndDay) __result = Settings.instance.maxDrop;
             else
             {
-                int startDay = Settings.options.declineStartDay;
-                int endDay = Settings.options.declineEndDay;
-                float startDrop = Settings.options.initialDrop;
-                float endDrop = Settings.options.maxDrop;
+                int startDay = Settings.instance.declineStartDay;
+                int endDay = Settings.instance.declineEndDay;
+                float startDrop = Settings.instance.initialDrop;
+                float endDrop = Settings.instance.maxDrop;
                 __result = (numDays - startDay) / (endDay - startDay) * (endDrop - startDrop) + startDrop;
             }
         }

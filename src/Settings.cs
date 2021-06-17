@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ModSettings;
+using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using ModSettings;
 
 namespace ExtremeTempDrop
 {
-    class ExtremeTempDropSettings : JsonModSettings
+    class Settings : JsonModSettings
     {
+        internal static Settings instance = new Settings();
+
         [Name("Preset")]
-        [Choice("Custom","Pilgram","Voyager","Stalker","Interloper")]
+        [Description("The default preset values from the base game. If you're using Relentless Night and don't want this to stack with its temperature degradation, you need to use the Pilgram preset.")]
+        [Choice("Custom", "Pilgram", "Voyager", "Stalker", "Interloper")]
         public int preset = 1;
 
         [Name("Initial Temperature Drop")]
@@ -75,15 +74,6 @@ namespace ExtremeTempDrop
                     declineEndDay = 50;
                     break;
             }
-        }
-    }
-    internal static class Settings
-    {
-        internal static ExtremeTempDropSettings options;
-        internal static void OnLoad()
-        {
-            options = new ExtremeTempDropSettings();
-            options.AddToModSettings("Extreme Temp Drop",MenuType.Both);
         }
     }
 }
