@@ -1,20 +1,20 @@
-﻿using HarmonyLib;
+﻿using Il2Cpp;
+using HarmonyLib;
 using MelonLoader;
-using UnityEngine;
 
 namespace ExtremeTempDrop
 {
     public class Implementation : MelonMod
     {
-        public override void OnApplicationStart()
+        public override void OnInitializeMelon()
         {
-            Debug.Log($"[{Info.Name}] Version {Info.Version} loaded!");
+            MelonLogger.Msg($"[{Info.Name}] Version {Info.Version} loaded!");
             Settings.instance.AddToModSettings("Extreme Temp Drop");
         }
     }
 
-    [HarmonyPatch(typeof(ExperienceModeManager), "GetOutdoorTempDropCelcius")]
-    public class ExperienceModeManager_GetOutdoorTempDropCelcius_Post
+    [HarmonyPatch(typeof(ExperienceModeManager), nameof(ExperienceModeManager.GetOutdoorTempDropCelcius))]
+    public class ExperienceModeManager_GetOutdoorTempDropCelcius
     {
         private static void Postfix(ref float __result, float numDays)
         {

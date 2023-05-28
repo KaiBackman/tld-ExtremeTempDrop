@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using BuildInfo = ExtremeTempDrop.BuildInfo;
 
 [assembly: ComVisible(false)]
-[assembly: Guid("647a40f3-d993-411a-8cd8-2590f3c0dae6")]
 
 [assembly: AssemblyTitle(BuildInfo.Name)]
 [assembly: AssemblyDescription(BuildInfo.Description)]

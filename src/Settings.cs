@@ -32,7 +32,7 @@ namespace ExtremeTempDrop
         [Description("The day at which global temperatures do not drop any farther.")]
         [Slider(0, 200)]
         public int declineEndDay = 0;
-        protected override void OnChange(FieldInfo field, object oldValue, object newValue)
+        protected override void OnChange(FieldInfo field, object? oldValue, object? newValue)
         {
             base.OnChange(field, oldValue, newValue);
             if (field.Name == nameof(preset)) UsePreset((int)newValue);
